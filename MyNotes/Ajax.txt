@@ -1,0 +1,30 @@
+Ajax :
+
+     * Ajax stand for Asynchronous JavaScript and XML.
+	 
+	 * We have two ways, a web client communicates to the application running on a server is Synchronous and 
+Asynchronous.
+
+     * Synchronous the client sense in a request and wait for the response to come back, he will not be able to
+take another action on the browser.
+
+     * Asynchronous he need not wait for the response to come back, he can send in multiple requests and the 
+responses will come back at some point later as a result he can perform something on the way instead of just...
+
+-----------------------------------------------------------------------------------------------------------------
+Sample Project :
+
+     * Previous we have develope sample project that contains two module, Register User and Dispaly Users module
+developed in SpringMVCORM project.
+
+     * To make more realtime project, our idea is you have to enter the id,name and email in Register module
+if you enter the id it goto the database check the id is already available or not without submiting the page
+using ajax call...
+
+     * Steps : 	Implement the backend Validation DAO layer which will check if the record exists in the db 
+without the given id then -> Service Layer -> Controller will be used or called into from the UI through an Ajax 
+call, We'll use the Jquery in out jsp page...
+
+
+	 
+-----------------------------------------------------------------------------------------------------------------

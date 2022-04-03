@@ -1,0 +1,80 @@
+Wiring and Auto Wiring : 
+
+       * A class dependent on B class means use ref tag in xml.file to achieve	using setter or constructor 
+methods. If this process is done by the programmer, then it is called bean wiring.
+
+       * If this process is done by the container itself, the spring container itself, then it is called auto-
+wiring...
+
+       * Autowiring to be achieve using
+	            i) XML -> No(Default),By Type,By Name,Auto Detect(work only spring 2.0 and below),By Constructor
+			   ii)Annotations -> @Autowired, @Qualifier
+			   
+-----------------------------------------------------------------------------------------------------------------	
+XML AutoWiring : 		  
+	   Example XML (byType) :
+				<bean name="address" class="AutoWiring.Address" p:hno="222"
+					p:street="South Street" p:city="Trichy" />
+				<bean class="AutoWiring.Employee" name="employee" autowire="byType"/>
+				
+			* First step check the test class which are the context.getBean invoke to find in xml.file for
+example our getBean contains employee to check that any bean tag name is employee after finding xml.file then 
+check parameters if autowire parameter there means the employee class have any class object declaration found
+or not (Address address) for example address is declare means take that name then check in xml any bean tag
+class contains that name or not if not means your output shows nullvalue otherwise runs normally.
+      
+	  Important : 
+	        * Suppose you not declare autowire bean means it return nullvalue...
+			
+			* Suppose you declare two bean tag name is different but class is same means it return error
+duplicate because byType it work based bean tag class only.
+
+	  Example XML (byName) :
+				<bean name="address" class="AutoWiring.Address" p:hno="222"
+					p:street="South Street" p:city="Trichy" />
+				<bean class="AutoWiring.Employee" name="employee" autowire="byName"/>
+				
+			* Check Employee class the Address object name and bean tag name is same means run othewise return 
+null value...
+
+	Example XML (constructor) :
+				<bean name="address" class="AutoWiring.Address" p:hno="222"
+					p:street="South Street" p:city="Trichy" />
+				<bean class="AutoWiring.Employee" name="employee" autowire="constructor"/>
+				
+			* Check Employee class have any constructor the constructor have any object if declare means to 
+check object class is there in pacakage or not...
+
+-----------------------------------------------------------------------------------------------------------------
+Annotations AutoWiring :
+
+       * you have two Annotations @Autowired and @Qualifier to use autowiring.
+	   
+	   * you need to config annotation tag in xml.file.  ( <context:annotation-config /> )
+	   
+@Autowired : 
+
+	   * Suppose you have two class Employee and Address, In employee class you declare object address means 
+before declaration mention that object is @Autowired.
+
+       * you can mention @Autowired annotation from setter method, constructor and object declaration area...
+	   
+       Ex : @Autowired                     @Autowired                         
+            private Address address;  (or) Employee(Address address){ this.address = address; } 
+			
+			(or)  @Autowired
+			      public void setAddress(Address address) {
+						this.address = address;
+				  }
+			
+@Qualifier :
+
+       * Suppose you have two class Employee and Address, In employee class you declare object address means 
+before declaration mention that object is @Autowired and @Qualifier(your bean tag name).
+
+       * you can mention @Qualifier annotation from setter method, constructor and object declaration area...
+	   
+	   * you can check above example for declaration, it only works combine of @Autowired and @Qualifier...
+	   
+-----------------------------------------------------------------------------------------------------------------
+Interface Injection you will refer the program you can understand better....

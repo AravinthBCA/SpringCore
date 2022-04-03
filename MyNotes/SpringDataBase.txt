@@ -1,0 +1,142 @@
+Spring JDBC :  JNDI = Java Naming and Directory Interface
+
+      * DataSource -> contains the database username,password and url, it create the connection. Internally 
+jdbc template will give the datasource to create a  connection create a statement and it is responsible for
+executing that insert statement as well.
+
+      * JDBCTemplate 
+	      DataSource
+		     Driver Class
+			 URL
+			 Name
+			 
+	 * JDBCTemplate call DataSource we need config Driver Class ,URL and Name in DataSource.
+
+      * A DataSource is a factory for connections to the physical databases. It is an alternative to the 
+DriverManager facility. A datasource uses a URL along with username/password credentials to establish the 
+database connection.
+
+      * Record insertion, delete, update, refer the DTO package in springjdbc project....
+	  
+-----------------------------------------------------------------------------------------------------------------
+Insert, Delete, Update Query :
+      
+	  * In spring jdbc you will write query in string variable then pass string in jdbcTemplate.update(sql).
+	  
+	  * Suppose you are going give input in runtime like firstname,lastname means you will specific the sql in
+? mark then assign the values from jdbcTemplate.update(sql,firstname,lastname).
+
+      Example : String sql = "insert into passenger values(?,?,?)";
+				int result = jdbcTemplate.update(sql,passenger.getId(),passenger.getFirstName(),
+				                                 passenger.getLastName());
+
+-----------------------------------------------------------------------------------------------------------------
+Select Query in Spring : Refer Program SpringJDBC project -> Select one or more records
+
+      * Select using spring two ways
+	  
+	         i) queryForObject(String sql,RowMapper<T>rowmapper,Object args):<T>   ---> Retrieve Single Row
+			ii) query(String sql,RowMapper<T>rowmapper):List<T>  ---> Retrieve One or More Rows
+			
+	  * RowMapper : Row Mapper is an interface in the spring framework which we need to implement it maps JDBC 
+result set. ResultSet -----> Object
+      
+	  Example : Employee mapRow(ResultSet rs)
+	                   emp.set(rs.get(1));
+	           
+-----------------------------------------------------------------------------------------------------------------
+JPA : Java Presistence API      Refer ScreenShots = Screenshot
+
+      * ORM = Object Relational Mapping, without ORM you will pass your primitive types, create an sql statement
+and then execute it against the database. All that work is done by the developer, except for the execution and
+when th response comes back we will convert that data java objects again all that work by developer.
+
+      * ORM provide a mapping, Every field in the class will be mapped to a database column ORM tool will 
+automatically convert our object into database rows vice versa.
+
+      * Hibernate methods like Save, Update, Delete, Get(return one row), LoadAll(return list of rows). 
+	  
+------------------------------------------------------------------------------------------------------------------
+Must Know Things :
+
+      * We have product pojo class, ProductDao interface , ProductDaoImpl implements the ProductDao, 
+ProductDao interact with HibernateTemplate it interact with SessionFactory implementation of sessionfactory is 
+LocalSessionFactoryBean, the SessionFactory needs a DataSource.
+		
+	  * We have Transaction Manager we need transactions when we do write operations against a database to ensure 
+that either all of them fall in one transaction, either all of them execute or they dont.
+		
+	  * LocalSessionFactoryBean depends on Datasource, HibernateProperties like key : value, hibernate.dialect
+AnnotatedClasses ( we need to tell the localsessionfacotry bean which all classes	in our application map to the
+database table ).
+	    
+	  *	The hibernate.dialect is a class that generates the SQL from the object we provide for a particular 
+		operation, If it is save it will generate insert. 
+		                  hibernate.dialect = org.hibernate.dialect.MYSQLDialect
+		
+	  * The hibernate.show_sql this property will tell the dialect that it should display all the SQL statements
+	    that it is generating and display on the console...
+		                    bernate.show_sql = true
+							
+------------------------------------------------------------------------------------------------------------------
+ORM Mapping :   Refer ScreenShots = Screenshot1
+     
+	 * ORM mapping have two ways XML and Annotations.
+	 
+	 * Annotations we have @Entity, @Id, @Table and @Column.
+	 
+	 * Entity and Id annotations are mandatory, Id annotations tells the object is Primary key or Unique key, 
+	   @Entity is used make your class as persistence class.
+	 
+	 * @Entity(name = "someThing") => this name will be used to name Entity
+       @Table(name = "someThing") => this name will be used to name a table in DB
+       Entity is object-oriented and table is relation-oriented. You can only use the entity name in the HQL 
+(Hibernate Query Language) to query objects, and the table name in the native SQL.
+
+------------------------------------------------------------------------------------------------------------------
+TransactionManager ( RollBack and Commit ) :
+
+     * Transaction Manager works under sessionfactory.
+
+     * RollBack Example is Debit from sender but Receiver have some issue so we need rollback the debit amount 
+to the sender.
+
+     * xmlns:tx="http://www.springframework.org/schema/tx" 
+	   http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx.xsd" 
+	   <tx:annotation-driven/> include above in xml file you need transactions for methods use @Transactional 
+annotation.
+
+     * You have write one method like Money Debit from Sender Credit from Receiver, the methods works well means
+all transaction will be commit, otherwise your method throws any exception means all the transactions will be 
+RollBack automatically...
+
+-----------------------------------------------------------------------------------------------------------------
+Create Sample Project Product : Refer = C:\Users\2080716\eclipse-workspace\Spring Framework\SpringORM\
+                                        BasicOperation
+
+     * Idea of Product Project is perform CRUD operations in Product table using Spring ORM.
+	 
+	 * You need Product Pojo class, ProductDao Interface it contains what are the operation you are going do to
+create abstract methods to implements that abstract methods into ProductDaoImpl class, XML config file configure
+your database and Test class for Run your project.
+
+     * Pojo class it contains id,name,description and price.
+	 
+	 * ProductDao Interface contains insert, update, delete and select abstract methods.
+	 
+	 * ProductDaoImpl class implements the ProductDao, create object of HibernateTemplate to use that template
+to perform save, update, delete and loadall against table.
+
+     * XML configuration file contains Datasource class ( why means this class only connecting to the database),
+LocalSessionFactoryBean class every CRUD operation performs inside this class it implements SessionFactory class,
+HibernateTemplate class contains per-defined template, the class contains save methods it have pre-defined insert
+sql query so you just pass data to that class it automatically insert data into table without write insert query,
+TransactionManager class refer above para.
+
+    * Test class, create the object of ProductDao Interface and Product class and set the values then pass 
+your product object into productdao.create method that methods do insertCreation it write own refer the program..
+	 
+-----------------------------------------------------------------------------------------------------------------
+	 
+	 

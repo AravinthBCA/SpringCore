@@ -1,0 +1,75 @@
+AOP :  Refer = https://www.javatpoint.com/spring-aop-tutorial
+
+     * AOP stands for Aspect Oriented Programming, It is the process of applying services or external services 
+such as transaction management or logging security etc. To our application classes without modifying the code or
+methods in those classes.
+
+     * These external services are also called cross-cutting concerns because they can be applied across the
+UI layer, Service layer and DAO layer javaee web application.
+
+     * So these external services can be just plugged in without changing any code, that process is called the
+Aspect Oriented Programming...
+
+-----------------------------------------------------------------------------------------------------------------
+AOP Terminologies : 
+
+     * Aspect is the class that represents external service.
+	 
+	 * Advice is a method defined inside the aspect class, we call also call it as an implementation of an aspect
+that is one way of looking at it.
+
+     * Point Cut provides an expression language, which all methods in our application need advisers, but point 
+cut that does not tell which advice is required by the particular method.
+
+     * JoinPoint is a combination of an advice and a point cut, it will tell which business method their needs 
+which advice next.
+
+     * Target is an object of the business class which need advisors.
+	 
+	 * Weaving is a process of mixing the advisors to the target object based on the joint points, weaving is 
+done by a component called Weaver.
+	 
+	 * Proxy is a class that is generated as a result of the weaving process, it is a combination of their advice
+and the business logic within the class...
+
+------------------------------------------------------------------------------------------------------------------
+PointCut : 
+
+    * syntax -> AccessSpecifier ReturnType package.class.methodName(parameter)
+	  Ex : public int com.aravinth.MyClass.multiply(int,int)
+	  
+	* * -> Astrict is used in AccessSpecifier,ReturnType,package,class,methodName, it means anything any method 
+name any class name any access specifier any returntype.
+
+    * .. -> use at package level it means the current package and the sub packages as well and use in method
+parameters level then that means any type of parameters it's always
+
+    * Ex : public void *Id() -> method name start with anything but end with Id.
+   
+    * Ex : public void *e*() -> method name start with anything should have a character E also end with anything
+
+    * Ex : public int get(..) -> any type or any number of parameters it allow.
+
+    * Ex : public * *() -> any return type any method name access specifier is public but no parameters.
+
+    * Ex : public * com.app..*.get*() -> method name should start with get it can end with anything, it should 
+fall into any class because we now used star here...
+
+-----------------------------------------------------------------------------------------------------------------
+Advice :
+
+	* Before Advice: it executes before a join point.
+	
+	* After Returning Advice: it executes after a joint point completes normally.
+	
+	* After Throwing Advice: it executes if method exits by throwing an exception.
+	
+	* After (finally) Advice: it executes after a join point regardless of join point exit whether normally or 
+exceptional return.
+	
+	* Around Advice: It executes before and after a join point.
+	
+	* Will be applying these annotations on the aspect classes we create and the methods inside them which are 
+our advices.
+
+-----------------------------------------------------------------------------------------------------------------

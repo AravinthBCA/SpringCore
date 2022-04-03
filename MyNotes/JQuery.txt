@@ -1,0 +1,19 @@
+JQuery : 
+
+      * This is JavaScript framework which makes the life off a UI developer quite easy to use javascript.
+	  
+	  * JQuery starts with a dollar symbol it hides a lot of things.
+	  
+	  * Example  Normal : document.getElementById("userId")
+	             JQuery : ${"#userId"}
+				 
+	  * To perform an Ajax call using JQuery again it simplifies a lot of things for us simple use 
+	    $.ajax({
+		       url:""
+			   data :{key:value}
+			   success:function(){}
+			  })
+			  
+-----------------------------------------------------------------------------------------------------------------
+			  
+	

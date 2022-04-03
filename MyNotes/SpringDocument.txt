@@ -1,0 +1,189 @@
+POJO   : Plan Old Java Object
+POJI'S : Plan Old Java Interface
+
+----------------------------------------------------------------------------------------------------------------- 
+Property injection : 
+
+    what is Property?
+	    The properties object contains key and value pair both as a string. The java.util.Properties 
+	 class is the subclass of Hashtable.
+	 
+	Advantage : 
+	    Recompilation is not required if the information is changed from a properties file: If any information 
+	is changed from the properties file, you don't need to recompile the java class. It is used to store 
+	information which is to be changed frequently.
+	
+-----------------------------------------------------------------------------------------------------------------
+How to refere two class one is dependent otherone :
+   
+    <bean name="scores" class="ReferenceClass.Scores" p:maths="80"
+		p:physics="80" p:chemistry="90" />
+	<bean name="student" class="ReferenceClass.Student">
+		<property name="scores">
+			<ref bean="scores"></ref>
+		</property>
+		<!-- <property name="scores" ref="scores/> -->
+	</bean>   
+	Using ref tag to refer the parent class....
+
+-----------------------------------------------------------------------------------------------------------------
+What are the ways to insert data in xml configuration :
+    
+  *	Value as element
+  *	Value as attribue
+  *	P Schema
+	
+-----------------------------------------------------------------------------------------------------------------
+Life Cycle in Spring : (Execution stage : Initialize the object -> set the value to setter methods ->
+                                          init method -> read and use the bean -> destory method -> 
+										  object destroy)
+
+	* Why we need cycle means very has a init and destroy point, In starting point we will initialize the values
+	  and destroy point we will close the connection and otherthings...
+	
+	* In manual you can include xml bean element init-method and destroy-method those methods create in pojo
+	  class....
+	  Ex : <bean name="patient2" class="lifeCycle.Patient2" p:id="123" init-method="hi" destroy-method="bye"/>
+	
+	* Use Interface implements InitializingBean,DisposableBean in pojo class it will automatically init and 
+	  destroy will work without include(init-method and destroy-method) xml file.
+	
+	* Use Annotations to init and destory work automatically (@PostConstruct, @PreDestroy) 
+      Default annotation not support we need add below line in xml configuration file....
+      <context:annotation-config/> include xml file.
+	  
+-----------------------------------------------------------------------------------------------------------------
+Dependency Check : 
+
+    * We have @Required Annotation it used in pojo class setter methods suppose your program id is mandatory
+means use this annotation, user doesn't give any id means it's throw an error.   
+    Ex : @Required  /* write in pojo class
+	     public void setId(int id) {
+		   this.id = id;
+	     }
+		 <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+    * the above line must be include in xml config file...
+	
+-----------------------------------------------------------------------------------------------------------------
+Nested Bean : 
+     
+	* One refer the another bean that needs a nested or inner bean.
+	Ex : <bean name="employee" class="NestedBean.Employee" p:id="123">
+			<property name="address">
+				<bean class="NestedBean.Address" p:hno="700"
+					p:street="North Street" p:city="trichy" />
+			</property>
+		</bean>
+-----------------------------------------------------------------------------------------------------------------
+Bean Scopes :
+    
+	* In default spring is singleton scope so you create two object have same value you can check hashcode of the
+object is also same.
+    * you can change scope in bean tag scope="prototype" it give different hashcode..
+	
+-----------------------------------------------------------------------------------------------------------------
+Constructor Injection : 
+
+    * How to set value in pojo using setter methods and anotherway of setting value using constructors...
+	* Assign value in xml file using constructor tag.
+	
+	Ex : <bean name="employee" class="InjectionUsingConstructor.Employee">
+			<constructor-arg>           
+				<value>123</value>
+			</constructor-arg>
+			<constructor-arg>
+				<ref bean="address" />
+			</constructor-arg>
+		 </bean>
+		 
+		 (OR)
+		 
+		 <constructor-arg value="123">   //using constructor value tag to assign values to constructor
+		 <constructor-arg ref="address">
+		 
+		 (OR)
+		 
+		 <bean class="InjectionUsingConstructor.Employee" name="employee" c:id="123" 
+		       c:address-ref="address"/>  //using c-shcema to assign values to constructor
+		 
+-----------------------------------------------------------------------------------------------------------------
+Constructor Ambiguity Problem : 
+
+	 Addition(Double a , Double b){
+		System.out.println("Double Constructor.....");
+    }
+     Addition(int a , int b){
+		System.out.println("Integer Constructor.....");
+	}
+	Addition(String a ,String b){
+		System.out.println("String Constructor.....");
+	}
+	
+	<bean name="addition" class="AmbiguityConstructorProblem.Addition">
+	<constructor-arg value="123"/>
+	<constructor-arg value="456"/>
+	</bean>
+	
+	* It call the String Constructor priority based suppose in your pojo no string constructor means which 
+constructor declare first with matching parameters it call, in above example your constructor value in xml is
+integer but in your pojo class assume you have declare double and interger means it call the double constructor
+because it declare first....
+
+Solution For Ambiguity Constructor Problem :
+    
+	* Using type attribue...
+	Ex : <constructor-arg value="123" type="int"/>
+		 <constructor-arg value="123" type="int"/>
+    * it call the interger constructor....
+	
+-----------------------------------------------------------------------------------------------------------------
+Another Problem in Constructor :
+     
+	 Ex : Addition(int a , double b){
+	           print("inside constructor");
+		  }
+		  
+		  <constructor-arg value="12.3" type="double"/>
+		  <constructor-arg value="1" type="int"/>
+	 *Your pojo class constructor order is different and your xml constructor assign value are different....
+		  
+Solution For Above Problem : 
+
+    <constructor-arg value="12.3" type="int" index="1"/>
+	<constructor-arg value="1" type="int" index="0/>
+	
+	* index based assign values to constructor....
+	* suppose you assign 12.3 to index 0 means it throw an error.
+	
+	<constructor-arg value="12.3" type="double" index="1" name="b"/>
+	<constructor-arg value="1" type="int" index="0" name="a"/>
+	
+	* check the above syntax using name attribute it as same pojo class constructor parameters name....
+
+	
+-----------------------------------------------------------------------------------------------------------------
+Standalone List : 
+    
+	* What is use standalone list means what type of list you want you can mention it and you can enter values
+to the list and reuse that list...
+
+    Example : 
+		  xmlns:util="http://www.springframework.org/schema/util"
+	      http://www.springframework.org/schema/util
+          http://www.springframework.org/schema/util/spring-util.xsd">
+		  
+		  * you need to write above and below lines in xml file.
+		  
+		  <util:list list-class="java.util.LinkedList"
+				id="productNames">
+				<value>Mac Book</value>
+				<value>Iphone</value>
+		  </util:list>
+
+		  <bean name="productsList" class="ProductsList">
+				<property name="productName">
+					<ref bean="productNames"></ref>
+				</property>
+		  </bean>
+
+------------------------------------------------------------------------------------------------------------------

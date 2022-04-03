@@ -1,0 +1,81 @@
+Component Annotation :   
+
+     * Componenet Annotation use is without creating the bean tag for the class.
+	 
+	 Example : 
+	     * In pojo class include below annotation.
+		 
+	     @Component("inst")	
+		 public class Instructor {...}
+		 
+		 * Include the below line in xml file...
+		 
+		 <context:component-scan base-package="org.springframework.stereotype.Component"/>
+		 
+-----------------------------------------------------------------------------------------------------------------
+Scope Annotation :
+
+     * Scope annotation is same as already seen bean tag scope parameter(check SpringDocument.txt).
+	 * component annotation along with Scope Annotation For Example you create two object without using scope
+annotation means it return same memory address you need to store different memory address means use @Scope("
+prototype") in the class...
+
+     Example : 
+	     * In pojo class include below annotation.
+		 
+		 @Component
+		 @Scope("prototype")
+		 public class Instructor {...}
+		 
+		 * Include the below line in xml file...
+		 
+		 <context:component-scan base-package="org.springframework.stereotype.Component"/>
+	 
+-----------------------------------------------------------------------------------------------------------------
+Value Annotation : 
+
+     * Above annotation you just call the class without using bean tag, but you need to pass value to the class
+right so using @Value annotation to pass value the variable.
+     
+	 Example : 
+		 * In pojo class include below annotation.
+		 
+	     public class Instructor {
+			@Value("10")
+			int id;
+			@Value("Aravinth")
+			String name;
+		 }
+		 
+		 * Include the below line in xml file...
+		 
+		 <context:component-scan base-package="org.springframework.stereotype.Component"/>
+		 
+-----------------------------------------------------------------------------------------------------------------
+Using Collections in Value Annotation : 
+
+     Example : 
+	 
+	     * In pojo class include below annotation.
+		 
+		 public class Instructor {
+			@Value("#{topics}")
+			private List<String> topics;
+		 }
+		 
+		  * Include the below line in xml file...
+		  
+		 <util:list list-class="java.util.LinkedList" id="topics">
+			<value>Java Web Services</value>
+			<value>Java Core</value>
+			<value>Full Stack Java</value>
+	     </util:list>
+		 
+-----------------------------------------------------------------------------------------------------------------
+SPEL :
+
+     * SPEL means Spring Expression Language.
+	 * @Value("#{66+44}")  -> the container add the value and return it.
+	 * @Value("#{5>6?22:33) 
+	 
+-----------------------------------------------------------------------------------------------------------------

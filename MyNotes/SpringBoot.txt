@@ -1,0 +1,81 @@
+SpringBoot :   https://www.javatpoint.com/spring-vs-spring-boot-vs-spring-mvc
+
+     * Java Spring Framework (Spring Framework) is a popular, open source, enterprise-level framework for 
+creating standalone, production-grade applications that run on the Java Virtual Machine (JVM).
+
+     * Java Spring Boot (Spring Boot) is a tool that makes developing web application and microservices with 
+Spring Framework faster and easier through three core capabilities:
+       i) AutoConfiguration
+	  ii) An opinionated approach to configuration
+	 iii) The ability to create standalone applications.
+	 
+	 * @SpringBootApplicaiton annotations it merges them into one single annotaiton like @Configuration,
+@EnableAutoConfiguration and @ComponentScan
+
+------------------------------------------------------------------------------------------------------------------
+Sping-Boot-Starter :
+
+     * We can use the spring-boot-started dependency, we can add this project as a Maven dependency and 
+automatically it will bring all the jar files that are required to build a standalone.
+
+     * If we want to develop web MVC application we will add a dependency in our pom.xml called 
+spring-boot-started-web.
+
+	 * If we want to use JPA for Java Persistance using Hibernate or whatever ORM. you would include
+spring-boot-started-data-jpa it will automatically add jars.
+
+	 * If we want to use Spring Data REST, you will add spring-boot-started-data-rest.
+
+------------------------------------------------------------------------------------------------------------------
+Spring JPA :
+
+    * Spring JPA stand for Java Persistance API.
+	
+	* It is a standard from oracle to do object relational mapping, that is to store our objects into the db and
+convert the db rows into objects and deal with them in our object oriented applications.
+
+    * The providers or the implementations of this standard are Hibernate, EclipseLink, OpenJPA and more.
+	
+	* The JPA standard provides EntityManagerFactory and entityManager,two key interfaces which we use throughout
+our application or at lease in the Data Access Layer to perform using CRUD operations.
+
+    * In your DAO layer u write CRUD operation methods right, without writing all that boilerplate coding reduce
+SpringData using CRUDReposity interface.
+
+------------------------------------------------------------------------------------------------------------------
+SpringBoot MVC :
+
+    * SpringBoot MVC why we need this because already we have SpringMVC because SpringBoot MVC reduce lots of
+boilerplate code like you don't need any external tomcat server because it already embedded in springboot and 
+web.xml and dispatcher.xml also predefined so you need chances only in that you can modify in applic.properties
+file directly.
+
+-----------------------------------------------------------------------------------------------------------------
+REST :
+
+    * REST ( Representational State Transfer ) is a bunch of principles or architectural guidelines and HTTP 
+allows us to easily implement REST.
+
+-----------------------------------------------------------------------------------------------------------------
+REST Priniciple :
+    
+	* Uniform Interface and Easy access.
+	
+	* POST to create a rsource, GET to retrieve a resource or read a resource, PUT to update, DELETE delete a 
+resource these are also knows as HTTP Verbs.
+
+    * Easy access, HTTP provides an easy access, easy and unique way to identify resources through it's URI and 
+URLS ( Ex : URI:/emplyees ) the URI and URLS are knows an NOUNS because they uniquely identify a resource.
+
+    * PUT method is used to update the record in db, your table have name,debp column, you want to update
+dept column means you want to send the whole details of the row(it not allow partial resource) otherwise 
+remaining things are set to null that why use PATCH it allow partial resource.
+
+    * A MIME type is a label used to identify a type of data. It is used so software can know how to handle the 
+data. It serves the same purpose on the Internet that file extensions do on Microsoft Windows, MIME types like
+text/xml, application/json, text/plain, hal/json and others.
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+

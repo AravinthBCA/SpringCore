@@ -1,0 +1,89 @@
+SpringMVC : Refer ScreenShot = screenschot,1,2
+
+      * MVC stands for Model-View-Controller. It is a software design pattern which was introducted in 1970s. 
+Also, MVC pattern forces a separation of concerns, it means domain model and controller logic are decoupled from
+user interface (view). As a result maintenance and testing of the application become simpler and easier.
+
+      * The Model represents a set of classes that describe the business logic i.e. business model as well as 
+data access operations i.e. data model. It also defines business rules for data means how the data can be changed
+and manipulated.
+
+      * The View represents the UI components like CSS, JQuery, html etc. It is only responsible for displaying 
+the data that is received from the controller as the result. This also transforms the model(s) into UI.
+
+      * The Controller is responsible to process incoming requests. It receives input from users via the View, 
+then process the user's data with the help of model and passing the results back into the view. Typically, it 
+acts as the coordinator between the view and the model.
+  
+-----------------------------------------------------------------------------------------------------------------
+Controller to the UI : Project Name = SpringMVC2
+
+      * Use ModelAndView to pass the data in anytype using addObject(key,value) use th key to display in the jsp
+page.
+
+      * DTO = Data Transfer Object.
+	  
+	  * You have to pass data in three types primitive, object and List.
+     
+	  * you goint to use list means import the pojo class and list also Refer the program you understand better.
+   
+-----------------------------------------------------------------------------------------------------------------
+UI To Controller : 
+
+      * First step create the html form then create the controller for receiving the data from form, how to 
+receive means in form you will set form action name the same name you mention in @RequestMapping value in the
+controller.
+
+      * @ModelAttribute use is before spring, you want to the enter id from form means using request object to
+getid methods use but springMVC using @ModelAttribute work is first create the pojo class for form then mention
+@ModelAttribute as a parameter it automatically get the data from form and set into the class.
+
+      * Using Request Parameters using to pass data form UI to Controller, send the by appending it end of url
+using query string , that is the question mark syntax followed by data as key and value pairs. Each of these key
+value pairs is separted by an ampersand symbol, Ex : ?key=value&key=value retrieve the data by using
+@RequestParam("key")DT methodParam ( DT = Data Type ) Ex : @RequestParam("id") int id  
+int id = Integer.parseInt(id); 
+
+      * Suppose any invalid data HTTP request throw 400 return-code to solve this using @RequestParam(value="id",
+required=false) int id ( by default required = true ) .
+
+      * Suppose you give key only in url it also throw error use defaultValue parameter to solve this problem @RequestParam(value="id",required=false,
+defaultValue="123") int id .
+ 
+      * Order of paremeter in url doesnot matter.
+	  
+	  * Ex : http://localhost:8084/SpringMVC/showData?id=1&name=aravinth&sal=60
+
+-----------------------------------------------------------------------------------------------------------------
+ModelMap And String:
+
+      * ModelMap and String concept replacing the ModelAndView concept those works are same.
+      
+	  * Suppose your requirement you want to change page means you can use String method to return the view name
+directly( Ex : return "userReg" ) without using Model.
+
+	  * Suppose you not interest to use setViewName in ModelAndView means you can use ModelMap it replace Model 
+concept suppose you need transfer view means use return statement directly.
+
+      * Refer Program = SpringFramework -> SpringMVC2 -> src -> Controller -> ModelMap ...
+	  
+-----------------------------------------------------------------------------------------------------------------
+Sample Project :
+
+      * Controller Layer -> Service Layer -> DAO Layer.
+	  
+	  * The project contains two module one is register module and another one is userdispaly module.
+	  
+	  * Refer Program = SpringFramework -> SpringMVCORm -> src -> User.Controller.
+	  
+	  * UserDisplay module we used JavaServer Pages Tag Library (JSTL) is a set of tags that can be used for 
+implementing some common operations such as looping, conditional formatting, and others.
+
+      * we need to add dependency of JSTL.
+	  
+	  * @Repository Annotation is a specialization of @Component annotation which is used to indicate that the 
+class provides the mechanism for storage, retrieval, update, delete and search operation on objects.
+
+-----------------------------------------------------------------------------------------------------------------
+	  
+	  

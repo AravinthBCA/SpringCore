@@ -1,0 +1,20 @@
+Java Configuration : 
+
+      * Starting 3.0 version of spring we can configure and use spring without using any xml in our application
+that these complete java based configuraiton will be replacing xml with a java class that wil be market with 
+@Configuration annotation form spring ones market this annotation tells spring that this particular class is a
+class is a source of spring beans.
+
+      * @Bean annotation that being annotation is similar to the bean tag of xml. Ex : @bean
+	                                                                                   Car car()
+																					   
+	  * Suppose you already have Dao config and now create another Service config you need Dao config means no 
+need to write another time you can just import the Dao config in the Service Config class.(@Import(Dao.class))
+
+      * You are going to use Java configuration means you need to delete web.xml and dispatcher.xml is 
+compulsory.	  
+
+-----------------------------------------------------------------------------------------------------------------
+																		
+																					   
+																					   
