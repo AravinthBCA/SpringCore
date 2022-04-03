@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean name="addition" class="AmbiguityConstructorProblem.Addition">
+		<!-- Any confusion refer the notepad...... -->
+		<!-- Problem statement 1 -->
+		<!--<constructor-arg value="123"/> <constructor-arg value="456"/> -->
+		<!-- Solution statement 1 -->
+		<!-- <constructor-arg value="123" type="int" /> Resolving Ambiguity constructor 
+			problem using type attribue <constructor-arg value="456" type="int" /> -->
+
+		<!-- Problem statement 2 -->
+		<!-- <constructor-arg value="12.3" type="double" />
+		<constructor-arg value="1" type="int" /> -->
+		<!-- Solution statement 2 -->
+		<constructor-arg value="12.3" type="double" index="1" name="b"/>
+		<constructor-arg value="1" type="int" index="0" name="a"/>
+	</bean>
+</beans>    

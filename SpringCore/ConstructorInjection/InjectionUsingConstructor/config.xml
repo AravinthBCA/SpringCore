@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean name="address" class="InjectionUsingConstructor.Address"
+		p:hno="555" p:street="North Street" p:city="Trichy" /> 
+		
+	<!-- <bean class="InjectionUsingConstructor.Employee" name="employee" c:id="123" 
+		c:address-ref="address"/>  -->
+		<!--using c-schema to assign value to constructor  -->
+		
+	<bean class="InjectionUsingConstructor.Employee" name="employee">
+		<!-- <constructor-arg> <value>123</value> </constructor-arg> <constructor-arg> 
+			<ref bean="address" /> </constructor-arg> --> <!--constructor value tag to assign value to
+			                                                  constructor -->
+		<constructor-arg value="123" />
+		<constructor-arg ref="address" />
+	</bean>
+	
+</beans>    
